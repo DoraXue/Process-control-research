@@ -1,0 +1,219 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Structured General Purpose Assignment
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when
+% writing assignment content.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{graphicx} % Required to insert images
+\usepackage{amsmath,amsfonts,amsthm}
+\usepackage{theorem}
+\usepackage{cancel}
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\setlength\parindent{0pt}
+\linespread{1.57}
+\allowdisplaybreaks
+
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\bff}{\mathbf{f}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bg}{\mathbf{g}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bxh}{\widehat{\mathbf{x}}}
+\newcommand{\byh}{\widehat{\mathbf{y}}}
+\newcommand{\bffh}{\widehat{\mathbf{f}}}
+\newcommand{\bGh}{\widehat{\mathbf{G}}}
+\newcommand{\bgh}{\widehat{\mathbf{g}}}
+\newcommand{\bxb}{\widebar{\mathbf{x}}}
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\xh}{\hat{x}}
+\newcommand{\bz}{\mathbf{0}}
+\newcommand{\bk}{\mathbf{k}}
+\newcommand{\Deltah}{\hat{\Delta}}
+\newcommand{\be}{\mathbf{e}}
+\newcommand{\Thetah}{\hat{\Theta}}
+\newcommand{\thetah}{\hat{\theta}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+\large
+2017-02-16
+\section{Stability of Nonlinear Systems}
+Class of system:
+\begin{equation}
+	\dot{a}(t) = f(a(t)) + g(a(t), u(t))
+\end{equation}
+Nonlinear model and the controller:
+\begin{equation}
+	\begin{aligned}
+		\dot{\hat{a}}(t) &= \hat{f}(\hat{a}(t)) + \hat{g}(\hat{a}(t), u(t))\\
+		u(t) &= k(\hat{a}(t))
+	\end{aligned}
+\end{equation}
+Then,
+\begin{equation}
+	\begin{aligned}
+		\dot{a}(t) &= f(a(t)) + g(a(t), k(\hat{a}(t))) = f(a(t)) + m(a(t), \hat{a}(t))\\
+		\dot{\hat{a}}(t) &= \hat{f}(\hat{a}(t)) + \hat{g}(\hat{a}(t), k(\hat{a}(t))) = \hat{f}(\hat{a}(t)) + \hat{m}(\hat{a}(t), \hat{a}(t))
+	\end{aligned}
+\end{equation}
+Assume the uncertainty between the model and the plant is additive:
+\begin{equation}
+	\begin{aligned}
+		\hat{f}(\zeta) &= f(\zeta) + \delta_f(\zeta)\\
+		\hat{m}(\zeta, \zeta) &= m(\zeta, \zeta) + \delta_m(\zeta)
+	\end{aligned}
+\end{equation}
+Then the error dynamics follows:
+\begin{equation}
+	\begin{aligned}
+		\dot{e}(t) &= f(a(t)) - \hat{f}(\hat{a}(t)) + m(a(t), \hat{a}(t)) - \hat{m}(\hat{a}(t), \hat{a}(t))\\
+				&= f(a(t)) - f(\hat{a}(t)) - \delta_f(\hat{a}(t)) + m(a(t), \hat{a}(t)) - m(\hat{a}(t), \hat{a}(t)) - \delta_m(\hat{a}(t))
+	\end{aligned}
+\end{equation}
+Assume the following Lipschitz conditions:
+\begin{equation}
+	\begin{aligned}
+		\|f(x) - f(y)\| &\leq K_f\|x - y\|\\
+		\|m(x, s) - m(y, s)\| &\leq K_m(s)\|x - y\|\\
+		\|\delta_f(x) - \delta_f(y)\| &\leq K_{\delta_f}\|x - y\|\\
+		\|\delta_m(x) - \delta_m(y)\| &\leq K_{\delta_m}\|x - y\|
+	\end{aligned}
+\end{equation}
+For $K_m(s)$, define $K_{m, \max} \doteq \max_{s\in B_s}(K_m(s))$ for $B_s$ a ball centered in the origin. Then
+\begin{equation}
+	\begin{aligned}
+		\|\dot{e}(t)\| &\leq K_f\|e(t)\| + K_{\delta_f}\|\hat{a}(t)\| + K_{m, \max}\|e(t)\| + K_{\delta_m}\|\hat{a}(t)\|\\
+					&= (K_f + K_{m, \max})\|e(t)\| + (K_{\delta_f} + K_{\delta_m})\|\hat{a}(t)\|
+	\end{aligned}
+\end{equation}
+Also assume that the model-based controller exponentially stabilizes the origin of the model, then with $\hat{a}(t_k)\in B_s$, $\hat{a}(t) \in B_s$, for $t \in [t_k, t_k+h)$, and
+\begin{equation}\label{eqn:model}
+	\|\hat{a}(t)\| \leq \alpha\|\hat{a}(t_k)\|e^{-\beta(t - t_k)}
+\end{equation}
+where $\alpha, \beta > 0$. Then
+\begin{equation}
+	\begin{aligned}
+		e(t) &= e(t_k) + \int_{t_k}^t [f(a(s)) - f(\hat{a}(s)) - \delta_f(\hat{a}(s)) + m(a(s), \hat{a}(s)) - m(\hat{a}(s), \hat{a}(s)) - \delta_m(\hat{a}(s))] ds\\
+			 &= \int_{t_k}^t [f(a(s)) - f(\hat{a}(s)) - \delta_f(\hat{a}(s)) + m(a(s), \hat{a}(s)) - m(\hat{a}(s), \hat{a}(s)) - \delta_m(\hat{a}(s))] ds\\
+		\|e(t)\| &\leq \int_{t_k}^t [(K_f + K_{m, \max})\|e(s)\| + \alpha(K_{\delta_f} + K_{\delta_m})\|\hat{a}(t_k)\|e^{-\beta(s - t_k)}] ds\\
+			 &= (K_f + K_{m, \max})\int_{t_k}^t \|e(s)\|ds + \alpha(K_{\delta_f} + K_{\delta_m})\|\hat{a}(t_k)\|\int_{t_k}^te^{-\beta(s - t_k)}] ds\\ 
+			 &= \frac{\alpha(K_{\delta_f} + K_{\delta_m})\|\hat{a}(t_k)\|}{-\beta}e^{-\beta(s - t_k)}\bigg|_{t_k}^t + (K_f + K_{m, \max})\int_{t_k}^t \|e(s)\|ds\\
+			 &= \frac{\alpha(K_{\delta_f} + K_{\delta_m})\|\hat{a}(t_k)\|}{\beta}(1 - e^{-\beta(t - t_k)}) + (K_f + K_{m, \max})\int_{t_k}^t \|e(s)\|ds\\
+	\end{aligned}
+\end{equation}
+
+From the Gronwall-Bellman Inequality, if a continuous real-valued function $y(t)$ satisfies:
+\begin{equation}
+	y(t) \leq \lambda(t) + \int_a^t \mu(s)y(s)ds
+\end{equation}
+with $\lambda(t)$ and $\mu(t)$ continuous real-valued functions and $\mu(t)$ non-negative for $t\in[a, b]$, then
+\begin{equation}
+	y(t) \leq \lambda(t) + \int_a^t\lambda(s)\mu(s)e^{\int_s^t\mu(t)d\tau}ds
+\end{equation}
+
+In our case,
+\begin{equation}
+	\begin{aligned}
+		y(t) &= \|e(t)\|\\
+		\lambda(t) &= \frac{\alpha(K_{\delta_f} + K_{\delta_m})\|\hat{a}(t_k)\|}{\beta}(1 - e^{-\beta(t - t_k)})\\
+		\mu(t) &= K_f + K_{m, \max}
+	\end{aligned}
+\end{equation}
+Therefore,
+\begin{equation}
+	\begin{aligned}
+		\|e(t)\| &\leq \frac{\alpha(K_{\delta_f} + K_{\delta_m})\|\hat{a}(t_k)\|}{\beta}(1 - e^{-\beta(t - t_k)}) \\&+ (K_f + K_{m, \max})\int_{t_k}^t \frac{\alpha(K_{\delta_f} + K_{\delta_m})\|\hat{a}(t_k)\|}{\beta}(1 - e^{-\beta(s - t_k)})e^{\int_s^t(K_f + K_{m, \max})d\tau}ds\\
+				 &= \frac{\alpha(K_{\delta_f} + K_{\delta_m})\|\hat{a}(t_k)\|}{\beta}(1 - e^{-\beta(t - t_k)}) \\&+ \frac{\alpha(K_f + K_{m, \max})(K_{\delta_f} + K_{\delta_m})\|\hat{a}(t_k)\|}{\beta}\int_{t_k}^t(1 - e^{-\beta(s - t_k)})e^{(K_f + K_{m, \max})(t-s)}ds
+	\end{aligned}
+\end{equation}
+To simplify the notations, define:
+\begin{equation}
+	\begin{aligned}
+		K_\delta &\doteq K_{\delta_f} + K_{\delta_m}\\
+		K_{fm} &\doteq K_f + K_{m, \max}
+	\end{aligned}
+\end{equation}
+Then,
+\begin{equation}\label{eqn:error}
+	\begin{aligned}
+		\|e(t)\| &\leq \frac{\alpha K_{\delta}\|\hat{a}(t_k)\|}{\beta}(1 - e^{-\beta(t - t_k)}) + \frac{\alpha K_{\delta}K_{fm}\|\hat{a}(t_k)\|}{\beta}\int_{t_k}^t(1 - e^{-\beta(s - t_k)})e^{K_{fm}(t-s)}ds\\
+				 &= \frac{\alpha K_{\delta}\|\hat{a}(t_k)\|}{\beta}\left[(1 - e^{-\beta(t - t_k)}) + K_{fm}\int_{t_k}^t(1 - e^{-\beta(s - t_k)})e^{K_{fm}(t-s)}ds\right]\\
+				 &= \frac{\alpha K_{\delta}\|\hat{a}(t_k)\|}{\beta}\left[(1 - e^{-\beta(t - t_k)}) + K_{fm}\int_{t_k}^t(e^{K_{fm}(t-s)} - e^{K_{fm}t-K_{fm}s - \beta s + \beta t_k})ds\right]\\
+				 &= \frac{\alpha K_{\delta}\|\hat{a}(t_k)\|}{\beta}\left[(1 - e^{-\beta(t - t_k)}) - e^{K_{fm}(t-s)}\bigg|_{t_k}^t + \frac{K_{fm}}{K_{fm} + \beta} e^{K_{fm}t - K_{fm}s - \beta s + \beta t_k}\bigg|_{t_k}^t\right]\\
+				 &= \frac{\alpha K_{\delta}\|\hat{a}(t_k)\|}{\beta}\left[1 - e^{-\beta(t - t_k)} + e^{K_{fm}(t-t_k)} - 1 + \frac{K_{fm}}{K_{fm} + \beta} (e^{- \beta(t - t_k)} - e^{K_{fm}(t-t_k)})\right]\\
+				 &= \frac{\alpha K_{\delta}\|\hat{a}(t_k)\|}{\beta}\left[e^{K_{fm}(t-t_k)} - e^{-\beta(t - t_k)} - \frac{K_{fm}}{K_{fm} + \beta}\left(e^{K_{fm}(t-t_k)} - e^{-\beta(t - t_k)}\right)\right]\\
+				 &= \frac{\alpha K_{\delta}\|\hat{a}(t_k)\|}{\beta}\left(1 - \frac{K_{fm}}{K_{fm} + \beta}\right)[e^{K_{fm}(t-t_k)} - e^{-\beta(t - t_k)}]\\
+				 &= \frac{\alpha K_{\delta}\|\hat{a}(t_k)\|}{K_{fm} + \beta}[e^{K_{fm}(t-t_k)} - e^{-\beta(t - t_k)}]\\
+	\end{aligned}
+\end{equation}
+Then, combining Eq.\ref{eqn:model} and Eq.\ref{eqn:error} yields
+\begin{equation}
+	\begin{aligned}
+		\|a(t)\| &\leq \|\hat{a}(t)\| + \|e(t)\|\\
+				 &= \alpha\|\hat{a}(t_k)\|e^{-\beta(t - t_k)} + \frac{\alpha K_{\delta}\|\hat{a}(t_k)\|}{K_{fm} + \beta}[e^{K_{fm}(t-t_k)} - e^{-\beta(t - t_k)}]\\
+				 &= \alpha\|\hat{a}(t_k)\|\left[e^{-\beta(t - t_k)} + \frac{K_{\delta}}{K_{fm} + \beta}[e^{K_{fm}(t-t_k)} - e^{-\beta(t - t_k)}]\right]\\
+		\|a(t_{k+1})\| &\leq \alpha\|\hat{a}(t_k)\|\left[e^{-\beta h} + \frac{K_{\delta}}{K_{fm} + \beta}[e^{K_{fm}h} - e^{-\beta h}]\right]\\
+	\end{aligned}
+\end{equation}
+To ensure stability, we need to require
+\begin{equation}
+	\|a(t_{k+1})\| < \|a(t_k)\| = \|\hat{a}(t_k)\| 
+\end{equation}
+Alternatively, we enfore the following stability condition
+\begin{equation}\label{eqn:stability}
+	\begin{aligned}
+		\alpha\|\hat{a}(t_k)\|\left[e^{-\beta h} + \frac{K_{\delta}}{K_{fm} + \beta}[e^{K_{fm}h} - e^{-\beta h}]\right] &< \|\hat{a}(t_k)\| \\
+		\alpha\left[e^{-\beta h} + \frac{K_{\delta}}{K_{fm} + \beta}[e^{K_{fm}h} - e^{-\beta h}]\right] &< 1\\
+		1 - \alpha\left[e^{-\beta h} + \frac{K_{\delta}}{K_{fm} + \beta}[e^{K_{fm}h} - e^{-\beta h}]\right] &> 0
+	\end{aligned}
+\end{equation}
+$h$ need to be sufficiently small such that the stability condition in Eq.\ref{eqn:stability} holds.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
