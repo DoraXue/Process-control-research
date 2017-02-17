@@ -1,0 +1,81 @@
+load('matlab.mat')
+Wx = eye(2);
+Wu = 1;
+Wh = 1e3;
+
+Tstep = 0.01;
+time = 0:Tstep:8;
+NumT = length(time);
+
+J_x = zeros(1, NumT);
+J_c = zeros(1, NumT);
+
+for t = 1:NumT
+   J_x(t) = x(:,t)'*Wx*x(:,t) + Wu*u(t)^2;
+   if t == 1
+       Delta = Tstep;
+   else
+       Delta = period(1,t) * Tstep;
+   end
+   J_c(t) = Wh/Delta; 
+end
+%%
+J = vertcat(J_c, J_x);
+
+Aplot = area(time, J', 'LineStyle','none'); 
+Aplot(1).FaceColor = 'y';
+Aplot(2).FaceColor = [0 0.75 0.75];
+legend('J(x)', 'J(c)')
+xlabel('$t$(min)','Interpreter','LaTex'); 
+ylabel('J - optimal');
+set(gca,'FontSize',24);
+
+%%
+J_x_lqr = zeros(1, NumT);
+J_c_lqr = zeros(1, NumT);
+coef = 0.7;
+Delta_ref = 0.17 + coef*(0.21 - 0.17);
+
+for t = 1:NumT
+   J_x_lqr(t) = x_lqr(:,t)'*Wx*x_lqr(:,t) + Wu*u_lqr(t)^2;
+   if t == 1
+       Delta_lqr = Tstep;
+   else
+       Delta_lqr = Delta_ref;
+   end
+   J_c_lqr(t) = 100*Wh/Delta_lqr; 
+end
+
+J_lqr = vertcat(J_c_lqr, J_x_lqr);
+
+Bplot = area(time, J_lqr', 'LineStyle','none');
+Bplot(1).FaceColor = [1 0.4 1];
+Bplot(2).FaceColor = [0.4 0.6 1];
+legend('J(x)', 'J(c)')
+xlabel('$t$(min)','Interpreter','LaTex'); 
+ylabel('J - LQR');
+set(gca,'FontSize',24);
+
+%%
+CostJ = J_c + J_x;
+CostJ_lqr = J_c_lqr + J_x_lqr;
+
+plot(time, CostJ); hold on;
+plot(time, CostJ_lqr, 'r')
+legend('optimal', 'LQR')
+xlabel('$t$(min)','Interpreter','LaTex'); 
+ylabel('J');
+set(gca,'FontSize',24);
+
+%%
+Cost_opt = sum(CostJ)*Tstep
+Cost_opt_x = sum(J_x)*Tstep
+Cost_opt_c = sum(J_c)*Tstep
+Ratio_opt_c = Cost_opt_c/Cost_opt*100
+
+Cost_lqr = sum(CostJ_lqr)*Tstep
+Cost_lqr_x = sum(J_x_lqr)*Tstep
+Cost_lqr_c = sum(J_c_lqr)*Tstep
+Ratio_lqr_c = Cost_lqr_c/Cost_lqr*100
+
+Cost_comp = Cost_opt/Cost_lqr
