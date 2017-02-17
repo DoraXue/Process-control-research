@@ -1,0 +1,96 @@
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{#1}
+\csname url@rmstyle\endcsname
+\providecommand{\newblock}{\relax}
+\providecommand{\bibinfo}[2]{#2}
+\providecommand\BIBentrySTDinterwordspacing{\spaceskip=0pt\relax}
+\providecommand\BIBentryALTinterwordstretchfactor{4}
+\providecommand\BIBentryALTinterwordspacing{\spaceskip=\fontdimen2\font plus
+\BIBentryALTinterwordstretchfactor\fontdimen3\font minus
+  \fontdimen4\font\relax}
+\providecommand\BIBforeignlanguage[2]{{%
+\expandafter\ifx\csname l@#1\endcsname\relax
+\typeout{** WARNING: IEEEtran.bst: No hyphenation pattern has been}%
+\typeout{** loaded for the language `#1'. Using the pattern for}%
+\typeout{** the default language instead.}%
+\else
+\language=\csname l@#1\endcsname
+\fi
+#2}}
+
+\bibitem{hespanha2007survey}
+J.~P. Hespanha, P.~Naghshtabrizi, and Y.~Xu, ``A survey of recent results in
+  networked control systems,'' \emph{PROCEEDINGS-IEEE}, vol.~95, no.~1, p. 138,
+  2007.
+
+\bibitem{gupta2010networked}
+R.~A. Gupta and M.-Y. Chow, ``Networked control system: overview and research
+  trends,'' \emph{IEEE Transactions on Industrial Electronics}, vol.~57, no.~7,
+  pp. 2527--2535, 2010.
+
+\bibitem{ke2013survey}
+Y.~Ke-You and X.~Li-Hua, ``Survey of recent progress in networked control
+  systems,'' \emph{Acta Automatica Sinica}, vol.~39, no.~2, pp. 101--117, 2013.
+
+\bibitem{christofides2007smart}
+P.~D. Christofides, J.~F. Davis, N.~H. El-Farra, D.~Clark, K.~R. Harris, and
+  J.~N. Gipson, ``Smart plant operations: Vision, progress and challenges,''
+  \emph{AIChE Journal}, vol.~53, no.~11, pp. 2734--2741, 2007.
+
+\bibitem{sun2008quasi}
+Y.~Sun and N.~H. El-Farra, ``Quasi-decentralized model-based networked control
+  of process systems,'' \emph{Computers \& Chemical Engineering}, vol.~32,
+  no.~9, pp. 2016--2029, 2008.
+
+\bibitem{moreira2016event}
+L.~Moreira, L.~Groff, and J.~G. da~Silva, ``Event-triggered state-feedback
+  control for continuous-time plants subject to input saturation,''
+  \emph{Journal of Control, Automation and Electrical Systems}, vol.~27, no.~5,
+  pp. 473--484, 2016.
+
+\bibitem{groff2016observer}
+L.~Groff, L.~Moreira, J.~G. da~Silva, and D.~Sbarbaro, ``Observer-based
+  event-triggered control: A discrete-time approach,'' in \emph{2016 American
+  Control Conference (ACC)}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2016,
+  pp. 4245--4250.
+
+\bibitem{mazo2011decentralized}
+M.~Mazo and P.~Tabuada, ``Decentralized event-triggered control over wireless
+  sensor/actuator networks,'' \emph{IEEE Transactions on Automatic Control},
+  vol.~56, no.~10, pp. 2456--2461, 2011.
+
+\bibitem{wang2011event}
+X.~Wang and M.~D. Lemmon, ``Event-triggering in distributed networked control
+  systems,'' \emph{IEEE Transactions on Automatic Control}, vol.~56, no.~3, pp.
+  586--601, 2011.
+
+\bibitem{garcia2013model}
+E.~Garcia and P.~J. Antsaklis, ``Model-based event-triggered control for
+  systems with quantization and time-varying network delays,'' \emph{IEEE
+  Transactions on Automatic Control}, vol.~58, no.~2, pp. 422--434, 2013.
+
+\bibitem{xue2016actuator}
+D.~Xue and N.~H. El-Farra, ``Actuator fault-tolerant control of networked
+  distributed processes with event-triggered sensor-controller communication,''
+  in \emph{2016 American Control Conference (ACC)}.\hskip 1em plus 0.5em minus
+  0.4em\relax IEEE, 2016, pp. 1661--1666.
+
+\bibitem{sun2010quasi}
+Y.~Sun and N.~H. El-Farra, ``Quasi-decentralized networked process control
+  using an adaptive communication policy,'' in \emph{Proceedings of the 2010
+  American Control Conference}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE,
+  2010, pp. 2841--2846.
+
+\bibitem{xue2016supervisory}
+D.~Xue and N.~H. El-Farra, ``Supervisory logic for control of networked process
+  systems with event-based communication,'' in \emph{2016 American Control
+  Conference (ACC)}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2016, pp.
+  7135--7140.
+
+\bibitem{christofides2005control}
+P.~D. Christofides and N.~El-Farra, \emph{Control of nonlinear and hybrid
+  process systems: Designs for uncertainty, constraints and time-delays}.\hskip
+  1em plus 0.5em minus 0.4em\relax Springer Science \& Business Media, 2005,
+  vol. 324.
+
+\end{thebibliography}
